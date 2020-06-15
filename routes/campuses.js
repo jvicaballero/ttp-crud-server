@@ -101,7 +101,7 @@ router.put("/:id", async (req, res, next) => {
   try {
     // if successfull:
     // Find a campus with a matching id from the database
-    const campus = await Campus.findByPk(id);
+    const campus = await Campus.findByPk(id, { include: Student });
     // database would return a valid campus object or an error
     console.log(updatedObj);
     // modify the campus object with new form data
@@ -120,6 +120,7 @@ router.put("/:id", async (req, res, next) => {
 });
 
 // Route to handle removing a campus
+// /api/campuses/:id
 router.delete("/:id", async (req, res, next) => {
   const { id } = req.params;
   // get an id for a campus to delete
